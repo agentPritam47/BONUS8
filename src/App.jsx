@@ -1,14 +1,16 @@
 import React, { useRef } from "react";
 import Scene from "./components/Scene";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
-
-import LocomotiveScroll from 'locomotive-scroll';
-
+import Lenis from "lenis";
 
 const App = () => {
-  const locomotiveScroll = new LocomotiveScroll();
+  const lenis = new Lenis();
+
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+
+  requestAnimationFrame(raf);
   const pageRef = useRef();
   return (
     <div className="h-[210vh] bg-[#0e0e0e] w-full relative " ref={pageRef}>
