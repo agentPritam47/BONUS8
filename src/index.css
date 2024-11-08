@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+h1{
+    color: #878ceb;
+}
+
+@font-face {
+  font-family: "nikea";
+  src: url("/Protos-D1nx.ttf");
+}
+
+@font-face {
+  font-family: "sa";
+  src: url("/Satoshi-Medium.otf");
+}
