@@ -17,7 +17,7 @@ const App = () => {
       <div className="h-screen w-full sticky top-0 left-0">
         <Scene />
       </div>
-      <div className="h-full w-full absolute top-0 left-0 p-10">
+      <div className="h-full w-full absolute top-0 left-0 p-10 ">
         <div className="h-screen w-full flex justify-between">
           <div className="w-1/2 h-full">
             <h1 className=" font-[nikea] text-6xl sm:text-7xl mt-[10vw] font-light text-white">

@@ -1,6 +1,10 @@
 import React, { useRef } from "react";
 import { Car } from "./Car";
-import { MeshReflectorMaterial } from "@react-three/drei";
+import {
+  MeshDistortMaterial,
+  MeshReflectorMaterial,
+  MeshTransmissionMaterial,
+} from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useGSAP } from "@gsap/react";
 import { useScroll } from "framer-motion";
@@ -11,22 +15,22 @@ const Experience = () => {
   const sceneRef = useRef();
   const { scrollYProgress } = useScroll();
 
-  useGSAP(()=>{
-    gsap.from(sceneRef.current.scale,{
-      x:0,
-      y:0,
-      z:0,
-      duration:2,
-      ease:"power4.inOut"
-    })
-  })
+  useGSAP(() => {
+    gsap.from(sceneRef.current.scale, {
+      x: 0,
+      y: 0,
+      z: 0,
+      duration: 2,
+      ease: "power4.inOut",
+    });
+  });
 
   useFrame(() => {
     const progress = scrollYProgress.get();
     const yRotationEnd = 0.67;
     const maxRotationY = -Math.PI / 2 + Math.PI * 1.5;
     const maxRotationX = Math.PI * 0.35;
-  
+
     // Handle Y-axis rotation first
     if (progress <= yRotationEnd) {
       const yProgress = progress / yRotationEnd;
@@ -34,10 +38,12 @@ const Experience = () => {
     } else {
       carRef.current.rotation.y = maxRotationY;
       // Start X-axis rotation after Y-axis completes
-      sceneRef.current.rotation.x = Math.min((progress - yRotationEnd) / (1 - yRotationEnd) * maxRotationX, maxRotationX);
+      sceneRef.current.rotation.x = Math.min(
+        ((progress - yRotationEnd) / (1 - yRotationEnd)) * maxRotationX,
+        maxRotationX
+      );
     }
   });
-  
 
   return (
     <>
@@ -65,12 +71,17 @@ const Experience = () => {
             metalness={1}
           />
         </mesh>
+        <group position={[0, 2.2, -10]}>
+          <mesh >
+            <sphereGeometry args={[1, 16, 16]} />
+            <meshPhysicalMaterial color={"white"} />
+          </mesh>
+        </group>
       </group>
-        <mesh position-y={-1.5} position-z={-15} scale={100}>
-          <planeGeometry args={[10, 10]} />
-          <meshBasicMaterial color="#878ceb" />
-        </mesh>
- 
+      <mesh position-y={-1.5} position-z={-15} scale={100}>
+        <planeGeometry args={[10, 10]} />
+        <meshBasicMaterial color="#878ceb" />
+      </mesh>
     </>
   );
 };
